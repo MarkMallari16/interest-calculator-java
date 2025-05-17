@@ -1,10 +1,15 @@
 package interest;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import javax.swing.SwingUtilities;
+
 public class Interest {
 
     public static void main(String[] args) {
-        Form form = new Form();
-        form.show();
+        FlatDarculaLaf.setup();
+        SwingUtilities.invokeLater(() -> {
+            Form form = new Form();
+            form.show();
+        });
     }
-
 }
