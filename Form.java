@@ -73,6 +73,7 @@ public class Form extends javax.swing.JFrame {
         btnCalculate = new javax.swing.JButton();
         txtFieldResult = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Form");
@@ -103,6 +104,15 @@ public class Form extends javax.swing.JFrame {
 
         jLabel5.setText("Result");
 
+        btnClear.setBackground(new java.awt.Color(255, 102, 102));
+        btnClear.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        btnClear.setText("CLEAR");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,7 +129,8 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(txtFielRate)
                     .addComponent(txtFieldPrincipal)
                     .addComponent(btnCalculate, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
-                    .addComponent(txtFieldResult))
+                    .addComponent(txtFieldResult)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -141,11 +152,13 @@ public class Form extends javax.swing.JFrame {
                 .addComponent(txtFieldTime, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -161,9 +174,19 @@ public class Form extends javax.swing.JFrame {
         double time = Double.parseDouble(strTime);
 
         double result = principal * rate * time;
-        strResult = String.valueOf(result);
+        strResult = String.valueOf(String.format("%.4f", result));
         txtFieldResult.setText(strResult);
     }//GEN-LAST:event_btnCalculateActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clearTextField(txtFieldPrincipal);
+        clearTextField(txtFielRate);
+        clearTextField(txtFieldTime);
+        clearTextField(txtFieldResult);
+    }//GEN-LAST:event_btnClearActionPerformed
+    private void clearTextField(JTextField textField) {
+        textField.setText("");
+    }
 
     /**
      * @param args the command line arguments
@@ -202,6 +225,7 @@ public class Form extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalculate;
+    private javax.swing.JButton btnClear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
