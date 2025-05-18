@@ -174,7 +174,7 @@ public class Form extends javax.swing.JFrame {
         double time = Double.parseDouble(strTime);
 
         double result = principal * rate * time;
-        strResult = String.valueOf(String.format("%.4f", result));
+        strResult = String.format("%.4f", result);
         txtFieldResult.setText(strResult);
     }//GEN-LAST:event_btnCalculateActionPerformed
 
