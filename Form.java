@@ -4,8 +4,10 @@
  */
 package interest;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -22,6 +24,11 @@ public class Form extends javax.swing.JFrame {
      */
     public Form() {
         initComponents();
+
+        //placeholder
+        txtFieldPrincipal.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Principal");
+        txtFielRate.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Rate");
+        txtFieldTime.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Time");
 
         //validates all text fields
         validateTextField(txtFieldPrincipal);
@@ -81,13 +88,13 @@ public class Form extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
         jLabel1.setText("Simple Interest Calculator");
 
-        jLabel2.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel2.setText("Principal");
 
-        jLabel3.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel3.setText("Rate");
 
-        jLabel4.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel4.setText("Time");
 
         btnCalculate.setBackground(new java.awt.Color(51, 153, 255));
@@ -110,7 +117,7 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel5.setText("Result");
 
         btnClear.setBackground(new java.awt.Color(255, 102, 102));
@@ -129,11 +136,6 @@ public class Form extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
@@ -143,10 +145,15 @@ public class Form extends javax.swing.JFrame {
                             .addComponent(txtFieldTime, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                             .addComponent(txtFielRate)
                             .addComponent(txtFieldPrincipal))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
@@ -154,10 +161,9 @@ public class Form extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1)
-                .addGap(22, 22, 22)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFieldPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,17 +174,16 @@ public class Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldTime, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 113, Short.MAX_VALUE))
+                        .addComponent(txtFieldTime, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldResult)))
-                .addGap(61, 61, 61)
+                        .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                .addGap(17, 17, 17))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -189,15 +194,28 @@ public class Form extends javax.swing.JFrame {
         strRate = txtFielRate.getText();
         strTime = txtFieldTime.getText();
 
+        if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFielRate, "Rate") || !validateFields(txtFieldTime, "Time")) {
+            return;
+        }
+
         double principal = Double.parseDouble(strPrincipal);
         double rate = Double.parseDouble(strRate);
         double time = Double.parseDouble(strTime);
-
         double result = principal * rate * time;
+
         strResult = String.format("%.4f", result);
         txtFieldResult.setText(strResult);
     }//GEN-LAST:event_btnCalculateActionPerformed
+    private boolean validateFields(JTextField textField, String textFieldName) {
+        String text = textField.getText().trim();
 
+        if (text.isEmpty()) {
+            JOptionPane.showMessageDialog(this, textFieldName + " is required!", "Required Field", JOptionPane.ERROR_MESSAGE);
+            textField.requestFocusInWindow();
+            return false;
+        }
+        return true;
+    }
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clearTextField(txtFieldPrincipal);
         clearTextField(txtFielRate);
