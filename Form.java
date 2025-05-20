@@ -5,6 +5,8 @@
 package interest;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -25,14 +27,26 @@ public class Form extends javax.swing.JFrame {
     public Form() {
         initComponents();
 
+        //combo box options;
+        cbInterestFormula.removeAllItems();
+        cbInterestFormula.addItem("Select Calculation");
+        cbInterestFormula.addItem("Calculate Interest");
+        cbInterestFormula.addItem("Calculate Principal");
+        cbInterestFormula.addItem("Calculate Rate");
+        cbInterestFormula.addItem("Calculate Time");
+
         //placeholder
         txtFieldPrincipal.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Principal");
         txtFielRate.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Rate");
+        txtFieldInterest.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Interest");
         txtFieldTime.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Time");
+
+        disabledTextfield();
 
         //validates all text fields
         validateTextField(txtFieldPrincipal);
         validateTextField(txtFielRate);
+        validateTextField(txtFieldInterest);
         validateTextField(txtFieldTime);
 
     }
@@ -76,11 +90,15 @@ public class Form extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtFielRate = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtFieldTime = new javax.swing.JTextField();
+        txtFieldInterest = new javax.swing.JTextField();
         btnCalculate = new javax.swing.JButton();
         txtFieldResult = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnClear = new javax.swing.JButton();
+        cbInterestFormula = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        txtFieldTime = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple Interest Calculator");
@@ -95,7 +113,7 @@ public class Form extends javax.swing.JFrame {
         jLabel3.setText("Rate");
 
         jLabel4.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
-        jLabel4.setText("Time");
+        jLabel4.setText("Interest");
 
         btnCalculate.setBackground(new java.awt.Color(51, 153, 255));
         btnCalculate.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
@@ -129,41 +147,69 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        cbInterestFormula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbInterestFormula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbInterestFormulaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        jLabel6.setText("Calculate");
+
+        jLabel7.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
+        jLabel7.setText("Time");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(txtFieldTime, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel4)
+                        .addComponent(txtFieldInterest)
+                        .addComponent(txtFielRate)
+                        .addComponent(txtFieldPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(cbInterestFormula, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5)
+                        .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(txtFieldTime, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
-                            .addComponent(txtFielRate)
-                            .addComponent(txtFieldPrincipal))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28))
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(113, 113, 113))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbInterestFormula, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFieldPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,16 +220,12 @@ public class Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldTime, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(txtFieldInterest, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
-                .addGap(27, 27, 27))
+                        .addComponent(txtFieldTime, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pack();
@@ -192,16 +234,12 @@ public class Form extends javax.swing.JFrame {
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
         strPrincipal = txtFieldPrincipal.getText();
         strRate = txtFielRate.getText();
-        strTime = txtFieldTime.getText();
+        strTime = txtFieldInterest.getText();
 
-        if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFielRate, "Rate") || !validateFields(txtFieldTime, "Time")) {
-            return;
-        }
-
-        double principal = Double.parseDouble(strPrincipal);
-        double rate = Double.parseDouble(strRate);
-        double time = Double.parseDouble(strTime);
-        double result = principal * rate * time;
+//        if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFielRate, "Rate") || !validateFields(txtFieldInterest, "Time")) {
+//            return;
+//        }
+        double result = getFormula();
 
         strResult = String.format("%.4f", result);
         txtFieldResult.setText(strResult);
@@ -216,16 +254,88 @@ public class Form extends javax.swing.JFrame {
         }
         return true;
     }
+
+    public double getFormula() {
+        //getting all values
+        String selectedFormula = (String) cbInterestFormula.getSelectedItem();
+
+        switch (selectedFormula) {
+            case "Calculate Interest": {
+                double principal = Double.parseDouble(txtFieldPrincipal.getText());
+                double rate = Double.parseDouble(txtFielRate.getText());
+                double time = Double.parseDouble(txtFieldTime.getText());
+                return (principal * rate * time) / 100;
+            }
+
+            case "Calculate Principal": {
+                double interest = Double.parseDouble(txtFieldInterest.getText());
+                double rate = Double.parseDouble(txtFielRate.getText());
+                double time = Double.parseDouble(txtFieldTime.getText());
+                return (interest * 100) / (rate * time);
+            }
+
+            case "Calculate Rate": {
+                double interest = Double.parseDouble(txtFieldInterest.getText());
+                double principal = Double.parseDouble(txtFieldPrincipal.getText());
+                double time = Double.parseDouble(txtFieldTime.getText());
+
+                return (interest * 100) / (principal * time);
+            }
+
+            case "Calculate Time": {
+                double interest = Double.parseDouble(txtFieldInterest.getText());
+                double principal = Double.parseDouble(txtFieldPrincipal.getText());
+                double rate = Double.parseDouble(txtFielRate.getText());
+                return (interest * 100) / (principal * rate);
+            }
+
+            default:
+                return 0.0;
+        }
+    }
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clearTextField(txtFieldPrincipal);
         clearTextField(txtFielRate);
+        clearTextField(txtFieldInterest);
         clearTextField(txtFieldTime);
         clearTextField(txtFieldResult);
+
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void txtFieldResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldResultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFieldResultActionPerformed
+    private void disabledTextfield() {
+        cbInterestFormula.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedFormula = (String) cbInterestFormula.getSelectedItem();
+
+                //enabled textfield first.
+                txtFieldInterest.setEnabled(true);
+                txtFieldPrincipal.setEnabled(true);
+                txtFielRate.setEnabled(true);
+                txtFieldTime.setEnabled(true);
+
+                switch (selectedFormula) {
+                    case "Calculate Interest":
+                        txtFieldInterest.setEnabled(false);
+                        break;
+                    case "Calculate Principal":
+                        txtFieldPrincipal.setEnabled(false);
+                        break;
+                    case "Calculate Rate":
+                        txtFielRate.setEnabled(false);
+                        break;
+                    case "Calculate Time":
+                        txtFieldTime.setEnabled(false);
+                }
+            }
+        });
+    }
+    private void cbInterestFormulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbInterestFormulaActionPerformed
+
+    }//GEN-LAST:event_cbInterestFormulaActionPerformed
     private void clearTextField(JTextField textField) {
         textField.setText("");
     }
@@ -268,12 +378,16 @@ public class Form extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalculate;
     private javax.swing.JButton btnClear;
+    private javax.swing.JComboBox<String> cbInterestFormula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txtFielRate;
+    private javax.swing.JTextField txtFieldInterest;
     private javax.swing.JTextField txtFieldPrincipal;
     private javax.swing.JTextField txtFieldResult;
     private javax.swing.JTextField txtFieldTime;
