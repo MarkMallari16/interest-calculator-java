@@ -180,12 +180,11 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(txtFieldInterest))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
-                        .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5)
+                    .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(113, 113, 113))
         );
@@ -218,7 +217,7 @@ public class Form extends javax.swing.JFrame {
                         .addComponent(txtFieldTime, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -261,6 +260,9 @@ public class Form extends javax.swing.JFrame {
 
         switch (selectedFormula) {
             case "Calculate Interest": {
+                if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFielRate, "Rate") || !validateFields(txtFieldTime, "Time")) {
+                    return 0.0;
+                }
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
                 double time = Double.parseDouble(txtFieldTime.getText());
@@ -268,6 +270,10 @@ public class Form extends javax.swing.JFrame {
             }
 
             case "Calculate Principal": {
+                if (!validateFields(txtFielRate, "Rate") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
+                    return 0.0;
+                }
+
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
                 double time = Double.parseDouble(txtFieldTime.getText());
@@ -275,6 +281,9 @@ public class Form extends javax.swing.JFrame {
             }
 
             case "Calculate Rate": {
+                if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
+                    return 0.0;
+                }
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double time = Double.parseDouble(txtFieldTime.getText());
@@ -283,6 +292,9 @@ public class Form extends javax.swing.JFrame {
             }
 
             case "Calculate Time": {
+                if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFielRate, "Rate")) {
+                    return 0.0;
+                }
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
