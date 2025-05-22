@@ -36,9 +36,9 @@
                   <Component id="txtFielRate" alignment="0" max="32767" attributes="0"/>
                   <Component id="txtFieldPrincipal" alignment="0" pref="489" max="32767" attributes="0"/>
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbInterestFormula" alignment="0" min="-2" pref="154" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <Component id="txtFieldInterest" alignment="0" max="32767" attributes="0"/>
+                  <Component id="cbInterestFormula" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="125" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -84,9 +84,9 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtFieldResult" min="-2" pref="306" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txtFieldResult" min="-2" pref="284" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnCalculate" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                           <Component id="btnClear" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
@@ -156,6 +156,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtFieldResult">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="23" green="23" red="23" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Poppins" size="36" style="0"/>
         </Property>
