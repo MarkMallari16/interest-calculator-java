@@ -5,10 +5,12 @@
 package interest;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -19,6 +21,7 @@ import javax.swing.JTextField;
 public class Form extends javax.swing.JFrame {
 
     private String strResult;
+    private ButtonGroup timeTypes = new ButtonGroup();
 
     /**
      * Creates new form Form
@@ -40,7 +43,25 @@ public class Form extends javax.swing.JFrame {
         txtFieldInterest.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Interest");
         txtFieldTime.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Time");
         txtFieldResult.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Result Here");
+
+        //icons
+        txtFieldInterest.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/interest.svg"));
+        txtFieldPrincipal.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/principal.svg"));
+        txtFielRate.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/rate.svg"));
+        txtFieldTime.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/time.svg"));
+        // txtFieldResult.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/result.svg"));
+
+        //disabling text fields
         disabledTextfield();
+        //adding radio btn name type
+        rdbNormalTime.setText("Normal Time");
+        rdbExactTime.setText("Exact Time");
+        rdbOrdinaryTime.setText("Ordinary Time");
+
+        //adding time radio type
+        timeTypes.add(rdbNormalTime);
+        timeTypes.add(rdbExactTime);
+        timeTypes.add(rdbOrdinaryTime);
 
         //validates all text fields
         validateTextField(txtFieldPrincipal);
@@ -99,6 +120,10 @@ public class Form extends javax.swing.JFrame {
         txtFieldTime = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        panel1 = new java.awt.Panel();
+        rdbOrdinaryTime = new javax.swing.JRadioButton();
+        rdbNormalTime = new javax.swing.JRadioButton();
+        rdbExactTime = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple Interest Calculator");
@@ -111,7 +136,13 @@ public class Form extends javax.swing.JFrame {
         jLabel2.setText("Principal");
 
         jLabel3.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
-        jLabel3.setText("Rate");
+        jLabel3.setText("Rate (converted decimal)");
+
+        txtFielRate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFielRateActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel4.setText("Interest");
@@ -127,7 +158,7 @@ public class Form extends javax.swing.JFrame {
         });
 
         txtFieldResult.setBackground(new java.awt.Color(35, 35, 35));
-        txtFieldResult.setFont(new java.awt.Font("Poppins", 0, 36)); // NOI18N
+        txtFieldResult.setFont(new java.awt.Font("Poppins Black", 1, 36)); // NOI18N
         txtFieldResult.setCaretColor(new java.awt.Color(255, 255, 255));
         txtFieldResult.setDisabledTextColor(new java.awt.Color(255, 255, 255));
         txtFieldResult.setEnabled(false);
@@ -149,6 +180,7 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        cbInterestFormula.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         cbInterestFormula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbInterestFormula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +196,40 @@ public class Form extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         jLabel8.setText("© Mark Mallari 2025");
+
+        rdbOrdinaryTime.setText("jRadioButton1");
+
+        rdbNormalTime.setText("jRadioButton1");
+        rdbNormalTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbNormalTimeActionPerformed(evt);
+            }
+        });
+
+        rdbExactTime.setText("jRadioButton1");
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addComponent(rdbNormalTime)
+                .addGap(18, 18, 18)
+                .addComponent(rdbExactTime)
+                .addGap(18, 18, 18)
+                .addComponent(rdbOrdinaryTime))
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdbNormalTime)
+                    .addComponent(rdbExactTime)
+                    .addComponent(rdbOrdinaryTime))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,19 +249,24 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtFieldInterest)
                     .addComponent(cbInterestFormula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5)
-                    .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(113, 113, 113))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(577, 577, 577))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5)
+                            .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(113, 113, 113))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(577, 577, 577))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,12 +303,15 @@ public class Form extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
@@ -274,20 +348,25 @@ public class Form extends javax.swing.JFrame {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFielRate, "Rate") || !validateFields(txtFieldTime, "Time")) {
                     return 0.0;
                 }
+                //validating time
+                validateTimeSelectedType();
+
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
-                double time = Double.parseDouble(txtFieldTime.getText());
-                return (principal * rate * time) / 100;
+                double time = getTimeSelectedType();
+                return (principal * rate * time);
             }
 
             case "Calculate Principal": {
                 if (!validateFields(txtFielRate, "Rate") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
                     return 0.0;
                 }
+                //validating time
+                validateTimeSelectedType();
 
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
-                double time = Double.parseDouble(txtFieldTime.getText());
+                double time = getTimeSelectedType();
                 return (interest * 100) / (rate * time);
             }
 
@@ -295,9 +374,12 @@ public class Form extends javax.swing.JFrame {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
                     return 0.0;
                 }
+                //validating time
+                validateTimeSelectedType();
+
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
-                double time = Double.parseDouble(txtFieldTime.getText());
+                double time = getTimeSelectedType();
 
                 return (interest * 100) / (principal * time);
             }
@@ -309,11 +391,32 @@ public class Form extends javax.swing.JFrame {
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
+
                 return (interest * 100) / (principal * rate);
             }
 
             default:
                 return 0.0;
+        }
+    }
+
+    private double getTimeSelectedType() {
+        double time = Double.parseDouble(txtFieldTime.getText());
+
+        if (rdbNormalTime.isSelected()) {
+            return time;
+        } else if (rdbExactTime.isSelected()) {
+            return time / 365;
+        } else if (rdbOrdinaryTime.isSelected()) {
+            return time / 360;
+        }
+        return 0.0;
+    }
+
+    private void validateTimeSelectedType() {
+        if (!rdbNormalTime.isSelected() && !rdbExactTime.isSelected() && !rdbOrdinaryTime.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Select Specific Time! (eg: Normal, Exact, Ordinary)", "Required", JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -322,6 +425,7 @@ public class Form extends javax.swing.JFrame {
         clearField(txtFieldInterest);
         clearField(txtFieldTime);
         clearField(txtFieldResult);
+        timeTypes.clearSelection();
 
     }//GEN-LAST:event_btnClearActionPerformed
 
@@ -340,6 +444,10 @@ public class Form extends javax.swing.JFrame {
                 txtFielRate.setEnabled(true);
                 txtFieldTime.setEnabled(true);
 
+                rdbNormalTime.setEnabled(true);
+                rdbExactTime.setEnabled(true);
+                rdbOrdinaryTime.setEnabled(true);
+
                 switch (selectedFormula) {
                     case "Calculate Interest":
                         txtFieldInterest.setEnabled(false);
@@ -352,6 +460,11 @@ public class Form extends javax.swing.JFrame {
                         break;
                     case "Calculate Time":
                         txtFieldTime.setEnabled(false);
+                        rdbNormalTime.setEnabled(false);
+                        rdbExactTime.setEnabled(false);
+                        rdbOrdinaryTime.setEnabled(false);
+
+                        break;
                 }
             }
         });
@@ -359,6 +472,14 @@ public class Form extends javax.swing.JFrame {
     private void cbInterestFormulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbInterestFormulaActionPerformed
 
     }//GEN-LAST:event_cbInterestFormulaActionPerformed
+
+    private void rdbNormalTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbNormalTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdbNormalTimeActionPerformed
+
+    private void txtFielRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFielRateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFielRateActionPerformed
     private void clearField(JTextField textField) {
         textField.setText("");
         cbInterestFormula.setSelectedItem("Select Calculation");
@@ -411,6 +532,10 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private java.awt.Panel panel1;
+    private javax.swing.JRadioButton rdbExactTime;
+    private javax.swing.JRadioButton rdbNormalTime;
+    private javax.swing.JRadioButton rdbOrdinaryTime;
     private javax.swing.JTextField txtFielRate;
     private javax.swing.JTextField txtFieldInterest;
     private javax.swing.JTextField txtFieldPrincipal;
