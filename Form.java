@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  * @author Mallari
  */
 public class Form extends javax.swing.JFrame {
-
+    
     private String strResult;
     private ButtonGroup timeTypes = new ButtonGroup();
 
@@ -42,14 +42,19 @@ public class Form extends javax.swing.JFrame {
         txtFielRate.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Rate");
         txtFieldInterest.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Interest");
         txtFieldTime.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Time");
-        txtFieldResult.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Result Here");
+//        txtFieldResult.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Result Here");
 
         //icons
+        lblTitle.setIcon(new FlatSVGIcon("svg/icon.svg"));
         txtFieldInterest.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/interest.svg"));
         txtFieldPrincipal.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/principal.svg"));
         txtFielRate.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/rate.svg"));
         txtFieldTime.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/time.svg"));
         // txtFieldResult.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/result.svg"));
+
+        //set button icons
+        btnCalculate.setIcon(new FlatSVGIcon("svg/calculator.svg"));
+        btnClear.setIcon(new FlatSVGIcon("svg/cross.svg"));
 
         //disabling text fields
         disabledTextfield();
@@ -68,29 +73,29 @@ public class Form extends javax.swing.JFrame {
         validateTextField(txtFielRate);
         validateTextField(txtFieldInterest);
         validateTextField(txtFieldTime);
-
+        
     }
-
+    
     private void validateTextField(JTextField textField) {
         textField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 String text = textField.getText();
-
+                
                 if (Character.isDigit(c)) {
                     return;
                 }
                 if (c == '.' && !text.contains(".")) {
                     return;
                 }
-
+                
                 if (c == '-' && text.isEmpty()) {
                     return;
                 }
-
+                
                 e.consume();
-
+                
             }
         });
     }
@@ -104,7 +109,7 @@ public class Form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtFieldPrincipal = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -119,7 +124,6 @@ public class Form extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtFieldTime = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         panel1 = new java.awt.Panel();
         rdbOrdinaryTime = new javax.swing.JRadioButton();
         rdbNormalTime = new javax.swing.JRadioButton();
@@ -129,8 +133,8 @@ public class Form extends javax.swing.JFrame {
         setTitle("Simple Interest Calculator");
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
-        jLabel1.setText("Simple Interest Calculator");
+        lblTitle.setFont(new java.awt.Font("Poppins", 1, 24)); // NOI18N
+        lblTitle.setText("Simple Interest Calculator");
 
         jLabel2.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel2.setText("Principal");
@@ -189,13 +193,10 @@ public class Form extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
-        jLabel6.setText("Calculate");
+        jLabel6.setText("Calculation");
 
         jLabel7.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel7.setText("Time");
-
-        jLabel8.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
-        jLabel8.setText("© Mark Mallari 2025");
 
         rdbOrdinaryTime.setText("jRadioButton1");
 
@@ -241,7 +242,7 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtFieldTime, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1)
+                    .addComponent(lblTitle)
                     .addComponent(jLabel3)
                     .addComponent(txtFielRate)
                     .addComponent(txtFieldPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
@@ -249,24 +250,19 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtFieldInterest)
                     .addComponent(cbInterestFormula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5)
+                    .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(113, 113, 113))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(577, 577, 577))))
+                        .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(113, 113, 113))
             .addGroup(layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,7 +270,7 @@ public class Form extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblTitle)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -301,13 +297,11 @@ public class Form extends javax.swing.JFrame {
                         .addComponent(txtFieldResult, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addContainerGap())
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -315,22 +309,22 @@ public class Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
-
+        
         String choice = (String) cbInterestFormula.getSelectedItem();
-
+        
         if (choice == null || choice.equals("Select Calculation")) {
             JOptionPane.showMessageDialog(this, "Please select calculation!", "Required Field", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
         double result = getFormula();
-
+        
         strResult = String.format("%.4f", result);
         txtFieldResult.setText(strResult);
     }//GEN-LAST:event_btnCalculateActionPerformed
     private boolean validateFields(JTextField textField, String textFieldName) {
         String text = textField.getText().trim();
-
+        
         if (text.isEmpty()) {
             JOptionPane.showMessageDialog(this, textFieldName + " is required!", "Required Field", JOptionPane.ERROR_MESSAGE);
             textField.requestFocusInWindow();
@@ -338,11 +332,11 @@ public class Form extends javax.swing.JFrame {
         }
         return true;
     }
-
+    
     public double getFormula() {
         //getting all values
         String selectedFormula = (String) cbInterestFormula.getSelectedItem();
-
+        
         switch (selectedFormula) {
             case "Calculate Interest": {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFielRate, "Rate") || !validateFields(txtFieldTime, "Time")) {
@@ -350,40 +344,40 @@ public class Form extends javax.swing.JFrame {
                 }
                 //validating time
                 validateTimeSelectedType();
-
+                
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
                 double time = getTimeSelectedType();
                 return (principal * rate * time);
             }
-
+            
             case "Calculate Principal": {
                 if (!validateFields(txtFielRate, "Rate") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
                     return 0.0;
                 }
                 //validating time
                 validateTimeSelectedType();
-
+                
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
                 double time = getTimeSelectedType();
                 return (interest * 100) / (rate * time);
             }
-
+            
             case "Calculate Rate": {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
                     return 0.0;
                 }
                 //validating time
                 validateTimeSelectedType();
-
+                
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double time = getTimeSelectedType();
-
+                
                 return (interest * 100) / (principal * time);
             }
-
+            
             case "Calculate Time": {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFielRate, "Rate")) {
                     return 0.0;
@@ -391,18 +385,18 @@ public class Form extends javax.swing.JFrame {
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
-
+                
                 return (interest * 100) / (principal * rate);
             }
-
+            
             default:
                 return 0.0;
         }
     }
-
+    
     private double getTimeSelectedType() {
         double time = Double.parseDouble(txtFieldTime.getText());
-
+        
         if (rdbNormalTime.isSelected()) {
             return time;
         } else if (rdbExactTime.isSelected()) {
@@ -412,7 +406,7 @@ public class Form extends javax.swing.JFrame {
         }
         return 0.0;
     }
-
+    
     private void validateTimeSelectedType() {
         if (!rdbNormalTime.isSelected() && !rdbExactTime.isSelected() && !rdbOrdinaryTime.isSelected()) {
             JOptionPane.showMessageDialog(this, "Select Specific Time! (eg: Normal, Exact, Ordinary)", "Required", JOptionPane.ERROR_MESSAGE);
@@ -443,11 +437,11 @@ public class Form extends javax.swing.JFrame {
                 txtFieldPrincipal.setEnabled(true);
                 txtFielRate.setEnabled(true);
                 txtFieldTime.setEnabled(true);
-
+                
                 rdbNormalTime.setEnabled(true);
                 rdbExactTime.setEnabled(true);
                 rdbOrdinaryTime.setEnabled(true);
-
+                
                 switch (selectedFormula) {
                     case "Calculate Interest":
                         txtFieldInterest.setEnabled(false);
@@ -463,7 +457,7 @@ public class Form extends javax.swing.JFrame {
                         rdbNormalTime.setEnabled(false);
                         rdbExactTime.setEnabled(false);
                         rdbOrdinaryTime.setEnabled(false);
-
+                        
                         break;
                 }
             }
@@ -524,14 +518,13 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JButton btnCalculate;
     private javax.swing.JButton btnClear;
     private javax.swing.JComboBox<String> cbInterestFormula;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lblTitle;
     private java.awt.Panel panel1;
     private javax.swing.JRadioButton rdbExactTime;
     private javax.swing.JRadioButton rdbNormalTime;
