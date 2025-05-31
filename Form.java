@@ -198,8 +198,15 @@ public class Form extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Poppins", 1, 12)); // NOI18N
         jLabel7.setText("Time");
 
+        rdbOrdinaryTime.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         rdbOrdinaryTime.setText("jRadioButton1");
+        rdbOrdinaryTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbOrdinaryTimeActionPerformed(evt);
+            }
+        });
 
+        rdbNormalTime.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         rdbNormalTime.setText("jRadioButton1");
         rdbNormalTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +214,7 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
+        rdbExactTime.setFont(new java.awt.Font("Poppins", 0, 12)); // NOI18N
         rdbExactTime.setText("jRadioButton1");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -216,10 +224,11 @@ public class Form extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(rdbNormalTime)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(rdbExactTime)
-                .addGap(18, 18, 18)
-                .addComponent(rdbOrdinaryTime))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rdbOrdinaryTime)
+                .addGap(12, 12, 12))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,10 +277,10 @@ public class Form extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
+                .addComponent(lblTitle)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbInterestFormula, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -474,6 +483,10 @@ public class Form extends javax.swing.JFrame {
     private void txtFielRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFielRateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFielRateActionPerformed
+
+    private void rdbOrdinaryTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbOrdinaryTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdbOrdinaryTimeActionPerformed
     private void clearField(JTextField textField) {
         textField.setText("");
         cbInterestFormula.setSelectedItem("Select Calculation");
