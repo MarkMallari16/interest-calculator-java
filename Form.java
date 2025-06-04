@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  * @author Mallari
  */
 public class Form extends javax.swing.JFrame {
-    
+
     private String strResult;
     private ButtonGroup timeTypes = new ButtonGroup();
 
@@ -42,7 +42,6 @@ public class Form extends javax.swing.JFrame {
         txtFielRate.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Rate");
         txtFieldInterest.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Interest");
         txtFieldTime.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter Time");
-//        txtFieldResult.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Result Here");
 
         //icons
         lblTitle.setIcon(new FlatSVGIcon("svg/icon.svg"));
@@ -50,7 +49,6 @@ public class Form extends javax.swing.JFrame {
         txtFieldPrincipal.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/principal.svg"));
         txtFielRate.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/rate.svg"));
         txtFieldTime.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/time.svg"));
-        // txtFieldResult.putClientProperty(FlatClientProperties.TEXT_FIELD_LEADING_ICON, new FlatSVGIcon("svg/result.svg"));
 
         //set button icons
         btnCalculate.setIcon(new FlatSVGIcon("svg/calculator.svg"));
@@ -73,29 +71,33 @@ public class Form extends javax.swing.JFrame {
         validateTextField(txtFielRate);
         validateTextField(txtFieldInterest);
         validateTextField(txtFieldTime);
-        
+
     }
-    
+
     private void validateTextField(JTextField textField) {
         textField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
                 String text = textField.getText();
-                
+
+                //validate character if digits
                 if (Character.isDigit(c)) {
                     return;
                 }
+
+                //validate if there is decimal first
                 if (c == '.' && !text.contains(".")) {
                     return;
                 }
-                
+
+                //validate if have negative sign (-)
                 if (c == '-' && text.isEmpty()) {
                     return;
                 }
-                
+
                 e.consume();
-                
+
             }
         });
     }
@@ -318,22 +320,26 @@ public class Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
-        
+
+        //getting selected checkedbox
         String choice = (String) cbInterestFormula.getSelectedItem();
-        
+
         if (choice == null || choice.equals("Select Calculation")) {
             JOptionPane.showMessageDialog(this, "Please select calculation!", "Required Field", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
+        //getting the formula
         double result = getFormula();
-        
+
         strResult = String.format("%.4f", result);
         txtFieldResult.setText(strResult);
     }//GEN-LAST:event_btnCalculateActionPerformed
     private boolean validateFields(JTextField textField, String textFieldName) {
+        //getting and trimming textfield
         String text = textField.getText().trim();
-        
+
+        //validation
         if (text.isEmpty()) {
             JOptionPane.showMessageDialog(this, textFieldName + " is required!", "Required Field", JOptionPane.ERROR_MESSAGE);
             textField.requestFocusInWindow();
@@ -341,11 +347,11 @@ public class Form extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
     public double getFormula() {
         //getting all values
         String selectedFormula = (String) cbInterestFormula.getSelectedItem();
-        
+
         switch (selectedFormula) {
             case "Calculate Interest": {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFielRate, "Rate") || !validateFields(txtFieldTime, "Time")) {
@@ -353,40 +359,40 @@ public class Form extends javax.swing.JFrame {
                 }
                 //validating time
                 validateTimeSelectedType();
-                
+
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
                 double time = getTimeSelectedType();
                 return (principal * rate * time);
             }
-            
+
             case "Calculate Principal": {
                 if (!validateFields(txtFielRate, "Rate") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
                     return 0.0;
                 }
                 //validating time
                 validateTimeSelectedType();
-                
+
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
                 double time = getTimeSelectedType();
                 return (interest * 100) / (rate * time);
             }
-            
+
             case "Calculate Rate": {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFieldTime, "Time")) {
                     return 0.0;
                 }
                 //validating time
                 validateTimeSelectedType();
-                
+
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double time = getTimeSelectedType();
-                
+
                 return (interest * 100) / (principal * time);
             }
-            
+
             case "Calculate Time": {
                 if (!validateFields(txtFieldPrincipal, "Principal") || !validateFields(txtFieldInterest, "Interest") || !validateFields(txtFielRate, "Rate")) {
                     return 0.0;
@@ -394,34 +400,40 @@ public class Form extends javax.swing.JFrame {
                 double interest = Double.parseDouble(txtFieldInterest.getText());
                 double principal = Double.parseDouble(txtFieldPrincipal.getText());
                 double rate = Double.parseDouble(txtFielRate.getText());
-                
+
                 return (interest * 100) / (principal * rate);
             }
-            
+
             default:
                 return 0.0;
         }
     }
-    
+
     private double getTimeSelectedType() {
         double time = Double.parseDouble(txtFieldTime.getText());
-        
+
+        //normal year
         if (rdbNormalTime.isSelected()) {
             return time;
         } else if (rdbExactTime.isSelected()) {
+            // for exact interest
             return time / 365;
         } else if (rdbOrdinaryTime.isSelected()) {
+            //for ordinary interest
             return time / 360;
         }
         return 0.0;
     }
-    
+
+    //validating radio button
     private void validateTimeSelectedType() {
         if (!rdbNormalTime.isSelected() && !rdbExactTime.isSelected() && !rdbOrdinaryTime.isSelected()) {
             JOptionPane.showMessageDialog(this, "Select Specific Time! (eg: Normal, Exact, Ordinary)", "Required", JOptionPane.ERROR_MESSAGE);
             return;
         }
     }
+
+    //clear textfields
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         clearField(txtFieldPrincipal);
         clearField(txtFielRate);
@@ -435,6 +447,7 @@ public class Form extends javax.swing.JFrame {
     private void txtFieldResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldResultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFieldResultActionPerformed
+    //disabling field based on selected calculation
     private void disabledTextfield() {
         cbInterestFormula.addActionListener(new ActionListener() {
             @Override
@@ -446,11 +459,11 @@ public class Form extends javax.swing.JFrame {
                 txtFieldPrincipal.setEnabled(true);
                 txtFielRate.setEnabled(true);
                 txtFieldTime.setEnabled(true);
-                
+
                 rdbNormalTime.setEnabled(true);
                 rdbExactTime.setEnabled(true);
                 rdbOrdinaryTime.setEnabled(true);
-                
+
                 switch (selectedFormula) {
                     case "Calculate Interest":
                         txtFieldInterest.setEnabled(false);
@@ -466,7 +479,7 @@ public class Form extends javax.swing.JFrame {
                         rdbNormalTime.setEnabled(false);
                         rdbExactTime.setEnabled(false);
                         rdbOrdinaryTime.setEnabled(false);
-                        
+
                         break;
                 }
             }
